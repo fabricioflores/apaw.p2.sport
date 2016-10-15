@@ -11,9 +11,16 @@ public class UserResource {
 		return new UserController().userList();
 	}
 
-	// GET **users/search
+	// GET **/users/search
 	public UserListWrapper searchBySport(String sportName) throws NotFoundThemeIdException {
 		return new UserController().usersBySport(sportName);
+	}
+
+	// POST **/users
+	public void createUser(String request) {
+		String nick = request.split(":")[0];
+		String email = request.split(":")[1];
+		new UserController().createUser(nick, email);
 	}
 
 }

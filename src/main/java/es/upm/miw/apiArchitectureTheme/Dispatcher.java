@@ -1,5 +1,6 @@
 package es.upm.miw.apiArchitectureTheme;
 
+import es.upm.miw.apiArchitectureTheme.api.SportResource;
 import es.upm.miw.apiArchitectureTheme.api.UserResource;
 import es.upm.miw.apiArchitectureTheme.exceptions.InvalidRequestException;
 import es.upm.miw.web.http.HttpRequest;
@@ -9,7 +10,7 @@ import es.upm.miw.web.http.HttpStatus;
 public class Dispatcher {
 
 	private UserResource userResource = new UserResource();
-	// private SportResource sportResource = new SportResource();
+	private SportResource sportResource = new SportResource();
 
 	private void responseError(HttpResponse response, Exception e) {
 		response.setBody("{\"error\":\"" + e + "\"}");
@@ -34,34 +35,30 @@ public class Dispatcher {
 	}
 
 	public void doPost(HttpRequest request, HttpResponse response) {
-		// switch (request.getPath()) {
-		// // POST **/themes body="themeName"
-		// case "themes":
-		// // Injectar parámetros...
-		// try {
-		// themeResource.createTheme(request.getBody());
-		// response.setStatus(HttpStatus.CREATED);
-		// } catch (InvalidThemeFieldException e) {
-		// this.responseError(response, e);
-		// }
-		// break;
-		// // POST votes body="themeId:vote"
-		// case "votes":
-		// String themeId = request.getBody().split(":")[0];
-		// String vote = request.getBody().split(":")[1];
-		// try {
-		// voteResource.createVote(Integer.valueOf(themeId),
-		// Integer.valueOf(vote));
-		// response.setStatus(HttpStatus.CREATED);
-		// } catch (Exception e) {
-		// responseError(response, e);
-		// }
-		// break;
-		// default:
-		// responseError(response, new
-		// InvalidRequestException(request.getPath()));
-		// break;
-		// }
+		switch (request.getPath()) {
+		// POST **/users body="nick:email"
+		case "users":
+			try {
+				userResource.createUser(request.getBody());
+				response.setStatus(HttpStatus.CREATED);
+			} catch (Exception e) {
+				this.responseError(response, e);
+			}
+			break;
+		// POST sports body="sportName"
+		case "sports":
+			String sportName = request.getBody();
+			try {
+				sportResource.createSport(sportName);
+				response.setStatus(HttpStatus.CREATED);
+			} catch (Exception e) {
+				responseError(response, e);
+			}
+			break;
+		default:
+			responseError(response, new InvalidRequestException(request.getPath()));
+			break;
+		}
 	}
 
 	public void doPut(HttpRequest request, HttpResponse response) {

@@ -22,8 +22,27 @@ public class ApiArchitectureMain {
 	}
 
 	public void demo() {
+		request.setMethod(HttpMethod.POST);
+		request.setPath("users");
+		request.setBody("uno:uno@gmail.com");
+		this.request();
+		request.setBody("dos:dos@gmail.com");
+		this.request();
+		request.setBody("uno:tres@gmail.com");
+		this.request();
+		request.setBody(null);
+
 		request.setMethod(HttpMethod.GET);
 		request.setPath("users");
+		this.request();
+
+		request.setMethod(HttpMethod.POST);
+		request.setPath("sports");
+		request.setBody("tenis");
+		this.request();
+		request.setBody("tenis");
+		this.request();
+		request.setBody("ajedrez");
 		this.request();
 
 		request.setMethod(HttpMethod.GET);
