@@ -11,4 +11,6 @@ public interface UserDao extends GenericDao<User, Integer> {
 
 	public abstract List<User> usersBySport(String sport);
 
+	public abstract User getByName(String name);
+
 }

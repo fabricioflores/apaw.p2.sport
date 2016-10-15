@@ -13,14 +13,6 @@ public class ApiArchitectureMain {
 
 	private HttpRequest request = new HttpRequest();
 
-	public void help() {
-		IO.getIO().println("GET **/themes");
-		IO.getIO().println("POST **/themes   body=\"themeName\"");
-		IO.getIO().println("GET **/themes/{id}/overage");
-		IO.getIO().println("POST **/votes   body=\"themeId:vote\"");
-		IO.getIO().println("GET **/votes");
-	}
-
 	public void demo() {
 		request.setMethod(HttpMethod.POST);
 		request.setPath("users");
@@ -45,11 +37,28 @@ public class ApiArchitectureMain {
 		request.setBody("ajedrez");
 		this.request();
 
+		request.setMethod(HttpMethod.PUT);
+		request.setPath("users/uno/sport");
+		request.setBody("tenis");
+		this.request();
+		request.setBody("noDeporte");
+		this.request();
+		request.setPath("users/dos/sport");
+		request.setBody("tenis");
+		this.request();
+		request.setBody("ajedrez");
+		this.request();
+		request.setBody(null);
+
 		request.setMethod(HttpMethod.GET);
 		request.setPath("users/search");
-		request.addQueryParam("sport", "sample");
+		request.addQueryParam("sport", "tenis");
 		this.request();
 		request.clearQueryParams();
+
+		request.setMethod(HttpMethod.POST);
+		request.setPath("noPath");
+		this.request();
 	}
 
 	public void httpMethod() {

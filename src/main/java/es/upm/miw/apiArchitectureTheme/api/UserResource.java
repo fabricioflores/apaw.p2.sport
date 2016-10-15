@@ -1,7 +1,6 @@
 package es.upm.miw.apiArchitectureTheme.api;
 
 import es.upm.miw.apiArchitectureTheme.controllers.UserController;
-import es.upm.miw.apiArchitectureTheme.exceptions.NotFoundThemeIdException;
 import es.upm.miw.apiArchitectureTheme.wrappers.UserListWrapper;
 
 public class UserResource {
@@ -12,15 +11,19 @@ public class UserResource {
 	}
 
 	// GET **/users/search
-	public UserListWrapper searchBySport(String sportName) throws NotFoundThemeIdException {
+	public UserListWrapper searchBySport(String sportName) {
 		return new UserController().usersBySport(sportName);
 	}
 
 	// POST **/users
-	public void createUser(String request) {
+	public void createUser(String request) throws Exception {
 		String nick = request.split(":")[0];
 		String email = request.split(":")[1];
 		new UserController().createUser(nick, email);
+	}
+
+	public void addSport(String user, String sport) throws Exception {
+		new UserController().addSport(user, sport);
 	}
 
 }

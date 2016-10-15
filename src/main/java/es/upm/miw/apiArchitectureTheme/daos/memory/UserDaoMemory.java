@@ -43,4 +43,16 @@ public class UserDaoMemory extends GenericMemoryDao<User> implements UserDao {
 		return usersWithSport;
 	}
 
+	@Override
+	public User getByName(String name) {
+		List<User> users = this.findAll();
+		User result = null;
+		for (User user : users) {
+			if (user.getNick().equals(name)) {
+				result = user;
+			}
+		}
+		return result;
+	}
+
 }
