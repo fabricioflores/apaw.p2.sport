@@ -4,6 +4,7 @@ import java.util.List;
 
 import es.upm.miw.apiArchitectureTheme.daos.DaoFactory;
 import es.upm.miw.apiArchitectureTheme.entities.Sport;
+import es.upm.miw.apiArchitectureTheme.exceptions.NameInUseException;
 
 public class SportController {
 
@@ -11,7 +12,7 @@ public class SportController {
 		if (!existsSport(sport)) {
 			DaoFactory.getFactory().getSportDao().create(new Sport(sport));
 		} else {
-			throw new Exception();
+			throw new NameInUseException(sport);
 		}
 	}
 

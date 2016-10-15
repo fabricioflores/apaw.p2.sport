@@ -1,6 +1,7 @@
 package es.upm.miw.apiArchitectureTheme.api;
 
 import es.upm.miw.apiArchitectureTheme.controllers.UserController;
+import es.upm.miw.apiArchitectureTheme.exceptions.EmptyFieldException;
 import es.upm.miw.apiArchitectureTheme.wrappers.UserListWrapper;
 
 public class UserResource {
@@ -11,7 +12,7 @@ public class UserResource {
 	}
 
 	// GET **/users/search
-	public UserListWrapper searchBySport(String sportName) {
+	public UserListWrapper searchBySport(String sportName) throws EmptyFieldException {
 		return new UserController().usersBySport(sportName);
 	}
 

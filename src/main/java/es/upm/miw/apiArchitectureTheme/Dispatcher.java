@@ -24,11 +24,11 @@ public class Dispatcher {
 			// **/users/search
 		} else if ("users".equals(request.paths()[0]) && "search".equals(request.paths()[1])
 				&& (request.getParams().size() == 1 && request.getParams().containsKey("sport"))) {
-			// try {
-			response.setBody(userResource.searchBySport(request.getParams().get("sport")).toString());
-			// } catch (Exception e) {
-			// responseError(response, e);
-			// }
+			try {
+				response.setBody(userResource.searchBySport(request.getParams().get("sport")).toString());
+			} catch (Exception e) {
+				responseError(response, e);
+			}
 		} else {
 			responseError(response, new InvalidRequestException(request.getPath()));
 		}
